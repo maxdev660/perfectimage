@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="description" content="Perfect SMP Images — public image hosting for the Perfect SMP community.">
+  <title>Perfect SMP Images</title>
+  <link rel="icon" href="/logo.png">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wide topbar-inner">
+      <a class="brand" href="/" data-route="home">
+        <img src="/logo.png" alt="Perfect SMP" class="brand-logo">
+        <span class="brand-copy"><strong>Perfect SMP Images</strong><small>community image host</small></span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <button class="nav-link active" data-route="home">Home</button>
+        <button class="nav-link" data-route="gallery">Gallery</button>
+        <button class="nav-link" data-route="upload">Upload</button>
+      </nav>
+      <div class="top-actions">
+        <button class="ghost-button" id="refreshButton" title="Refresh public gallery">Refresh</button>
+        <button class="yellow-button" data-route="upload">Upload image</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page active" data-page="home">
+      <div class="wide hero">
+        <div class="hero-copy">
+          <div class="eyebrow">Perfect SMP community uploads</div>
+          <h1>One public library<br><span>for every image.</span></h1>
+          <p>Upload screenshots, server moments, builds, memes and announcements. Every visitor sees the same public gallery and every image gets a reusable link for Minecraft.</p>
+          <div class="hero-actions">
+            <button class="yellow-button large" data-route="upload">Upload an image</button>
+            <button class="ghost-button large" data-route="gallery">Browse all uploads</button>
+          </div>
+          <div class="hero-note">Every upload is public. Delete access stays with the uploader's browser through a private delete token.</div>
+        </div>
+        <div class="hero-grid" id="heroGrid" aria-label="Recent community uploads">
+          <div class="hero-tile placeholder"></div>
+          <div class="hero-tile placeholder"></div>
+          <div class="hero-tile placeholder"></div>
+          <div class="hero-tile placeholder"></div>
+        </div>
+      </div>
+
+      <div class="stat-strip">
+        <div class="wide stat-grid">
+          <div><strong id="statImages">0</strong><span>public images</span></div>
+          <div><strong id="statToday">0</strong><span>uploaded today</span></div>
+          <div><strong id="statStorage">0 MB</strong><span>visible storage</span></div>
+          <div><strong>∞</strong><span>reusable links</span></div>
+        </div>
+      </div>
+
+      <section class="wide section">
+        <div class="section-head">
+          <div><span class="eyebrow">Latest</span><h2>Recent community uploads</h2><p>Images posted by everyone using Perfect SMP Images.</p></div>
+          <button class="text-button" data-route="gallery">See full gallery →</button>
+        </div>
+        <div class="image-grid" id="homeGallery"></div>
+      </section>
+    </section>
+
+    <section class="page" data-page="gallery">
+      <div class="wide page-head">
+        <div><span class="eyebrow">Public feed</span><h1>All uploads</h1><p>Everything posted by the community appears here for everyone.</p></div>
+        <button class="yellow-button" data-route="upload">Upload image</button>
+      </div>
+      <div class="wide gallery-tools">
+        <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search title, uploader or tag…"></label>
+        <select id="sortSelect" class="select">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+          <option value="name-asc">Name A–Z</option>
+          <option value="name-desc">Name Z–A</option>
+          <option value="size-desc">Largest first</option>
+          <option value="size-asc">Smallest first</option>
+        </select>
+      </div>
+      <section class="wide gallery-section">
+        <div class="image-grid" id="publicGallery"></div>
+        <div class="load-more-wrap"><button class="ghost-button" id="loadMoreButton">Load more</button></div>
+      </section>
+    </section>
+
+    <section class="page" data-page="upload">
+      <div class="wide page-head compact">
+        <div><span class="eyebrow">New public upload</span><h1>Upload</h1><p>Your image will appear in the shared gallery for every visitor.</p></div>
+      </div>
+      <div class="wide upload-layout">
+        <section class="upload-card" id="dropZone">
+          <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+          <div class="drop-empty" id="dropEmpty">
+            <div class="upload-symbol">↑</div>
+            <h2>Drop an image here</h2>
+            <p>PNG, JPG or WEBP up to 15 MB.</p>
+            <button class="yellow-button" id="chooseFileButton">Choose file</button>
+          </div>
+          <div class="preview-shell hidden" id="previewShell">
+            <img id="previewImage" alt="Selected upload">
+          </div>
+        </section>
+        <aside class="upload-form-card">
+          <div class="form-top"><span class="eyebrow">Post details</span><h2 id="selectedFilename">No image selected</h2><p id="selectedMeta">Choose an image first.</p></div>
+          <label class="field"><span>Title</span><input id="titleInput" maxlength="120" placeholder="Image title"></label>
+          <label class="field"><span>Posted by</span><input id="uploaderInput" maxlength="48" placeholder="Your Minecraft name (optional)"></label>
+          <label class="field"><span>Tags</span><input id="tagsInput" maxlength="180" placeholder="spawn, build, event"></label>
+          <div class="field-hint">Tags are comma-separated. Your uploader name is remembered only in this browser.</div>
+          <div class="progress hidden" id="uploadProgress"><div class="progress-row"><span id="progressText">Uploading…</span><b id="progressPercent">0%</b></div><div class="progress-track"><div id="progressBar"></div></div></div>
+          <div class="upload-form-actions"><button class="ghost-button" id="cancelUploadButton">Reset</button><button class="yellow-button" id="submitUploadButton" disabled>Post publicly</button></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="page" data-page="image">
+      <div class="wide image-page">
+        <button class="back-button" data-route="gallery">← Back to gallery</button>
+        <div class="detail-layout">
+          <div class="detail-image-wrap"><img id="detailImage" alt=""></div>
+          <aside class="detail-card">
+            <div class="eyebrow">Public image</div>
+            <h1 id="detailTitle">Image</h1>
+            <div class="detail-author" id="detailAuthor"></div>
+            <div class="detail-meta" id="detailMeta"></div>
+            <div class="detail-tags" id="detailTags"></div>
+            <div class="detail-actions">
+              <button class="yellow-button" id="copyImageCommandButton">Copy /image</button>
+              <button class="ghost-button" id="copyShareLinkButton">Copy page link</button>
+              <button class="ghost-button" id="copyRawLinkButton">Copy raw image</button>
+              <button class="ghost-button danger hidden" id="deleteImageButton">Delete my upload</button>
+            </div>
+            <div class="code-block"><span>Share link</span><code id="shareUrlCode"></code></div>
+            <div class="code-block"><span>Minecraft</span><code id="commandCode"></code></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wide footer-inner"><div class="footer-brand"><img src="/logo.png" alt=""><span><strong>Perfect SMP Images</strong><small>public community image hosting</small></span></div><div class="footer-status"><i></i><span id="apiStatus">connecting…</span></div></div>
+  </footer>
+
+  <div class="viewer hidden" id="viewer">
+    <div class="viewer-bar"><div><strong id="viewerTitle"></strong><small id="viewerInfo"></small></div><button id="closeViewerButton">×</button></div>
+    <div class="viewer-stage"><img id="viewerImage" alt=""></div>
+  </div>
+
+  <div class="toast-stack" id="toastStack"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

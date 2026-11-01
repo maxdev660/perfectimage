@@ -1,0 +1,31 @@
+name: PerfectSMPImages
+version: 1.0.0
+main: de.perfectsmp.images.PerfectSMPImagesPlugin
+api-version: '1.21'
+author: Perfect SMP
+description: Perfect SMP public image sharing with website links and an ingame map viewer.
+
+commands:
+  imagewebsite:
+    description: Opens the Perfect SMP Images website.
+    usage: /imagewebsite
+  uploadimage:
+    description: Opens the Perfect SMP Images upload page.
+    usage: /uploadimage
+  image:
+    description: Posts a Perfect SMP Images link to all online players.
+    usage: /image <link-or-id>
+  showimage:
+    description: Opens a Perfect SMP image as a temporary map viewer.
+    usage: /showimage <id>
+  closeimage:
+    description: Closes the temporary image map viewer.
+    usage: /closeimage
+
+permissions:
+  perfectsmpimages.use:
+    default: true
+  perfectsmpimages.post:
+    default: true
+  perfectsmpimages.view:
+    default: true

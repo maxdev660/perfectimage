@@ -1,0 +1,10 @@
+{
+  "name": "perfect-smp-images-pages",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node -e \"console.log('Perfect SMP Images: static Pages site, no build step required.')\"",
+    "check": "node --check 'functions/[[path]].js' && node --check public/app.js"
+  }
+}

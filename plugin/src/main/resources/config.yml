@@ -1,0 +1,9 @@
+# Your deployed Cloudflare Worker / custom domain.
+website-url: "https://perfect-smp-images.YOUR-SUBDOMAIN.workers.dev"
+
+# Leave empty to automatically use the host from website-url.
+# Example: images.perfectsmp.net
+allowed-host: ""
+
+request-timeout-seconds: 12
+max-download-bytes: 15728640
